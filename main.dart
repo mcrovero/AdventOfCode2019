@@ -8,8 +8,11 @@ Future<void> main() async {
   var totalFuel = 0;
   await for (var line in lines) {
     var mass = int.parse(line);
-    var fuel = (mass / 3.0).floor() - 2;
-    totalFuel += fuel;
+    do {
+      mass = (mass / 3.0).floor() - 2;
+      if (mass < 0) mass = 0;
+      totalFuel += mass;
+    } while (mass > 0);
   }
-  print(totalFuel);
+  print("totalFuel: $totalFuel");
 }
