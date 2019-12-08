@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 
 Future<void> main() async {
-  final lines = utf8.decoder
-      .bind(File('input.txt').openRead())
-      .transform(const LineSplitter());
+  final lines = File('input.txt').readAsLinesSync();
   var totalFuel = 0;
-  await for (var line in lines) {
+  for (var line in lines) {
     var mass = int.parse(line);
     do {
       mass = (mass / 3.0).floor() - 2;
