@@ -7,7 +7,6 @@ Future<void> main() async {
   var coordinates2 = processPath(input[1].split(","));
   var minDist;
 
-  // TODO: Find first all intersactions and then process those with the path finder
   List<String> intersections = [];
   for (String coord in coordinates1) {
     if (coordinates2.contains(coord)) {
@@ -19,6 +18,18 @@ Future<void> main() async {
       }
     }
   }
+  print("minDist: $minDist");
+  var minSteps;
+  for (String intersection in intersections) {
+    var steps1 = coordinates1.indexWhere((c) => c == intersection) + 1;
+    var steps2 = coordinates2.indexWhere((c) => c == intersection) + 1;
+    print("$intersection: $steps1 - $steps2");
+    var totSteps = steps1 + steps2;
+    if (minSteps == null || totSteps < minSteps) {
+      minSteps = totSteps;
+    }
+  }
+  print("minSteps: $minSteps");
 }
 
 List<String> processPath(List<String> instructions) {
